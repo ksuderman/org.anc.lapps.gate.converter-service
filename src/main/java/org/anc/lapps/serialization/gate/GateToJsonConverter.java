@@ -7,11 +7,15 @@ import org.lappsgrid.api.*;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.Types;
 
+import org.slf4j.*;
+
 /**
  * @author Keith Suderman
  */
-public class GateToJsonConverter implements WebService
+public class GateToJsonConverter extends ConverterBase implements WebService
 {
+   private static Logger logger = LoggerFactory.getLogger(GateToJsonConverter.class);
+
    public GateToJsonConverter()
    {
 
@@ -19,7 +23,7 @@ public class GateToJsonConverter implements WebService
 
    public long[] produces()
    {
-      return new long[] { Types.JSON_LD };
+      return new long[] { Types.JSON };
    }
 
    public long[] requires()
@@ -37,14 +41,19 @@ public class GateToJsonConverter implements WebService
       Data result;
       try
       {
+         logger.debug("Converting document to JSON");
          Document document = Factory.newDocument(input.getPayload());
+         logger.debug("Gate document created.");
          String json = GateSerializer.toJson(document);
-         result = new Data(Types.JSON_LD, json);
+         logger.debug("Document serialized to JSON.");
+         result = new Data(Types.JSON, json);
       }
       catch (ResourceInstantiationException e)
       {
+         logger.error("Unable to convert document.", e);
          result = DataFactory.error(e.getMessage());
       }
+      logger.debug("Returning JSON document.");
       return result;
    }
 }

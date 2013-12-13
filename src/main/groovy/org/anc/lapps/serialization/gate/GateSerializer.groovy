@@ -7,11 +7,14 @@ import gate.Factory
 import gate.FeatureMap
 import groovy.json.JsonSlurper
 import org.anc.lapps.serialization.*
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @author Keith Suderman
  */
 class GateSerializer {
+    private static Logger logger = LoggerFactory.getLogger(GateSerializer.class)
 
 //    static AnnotationMapper annotationMapper = new AnnotationMapper()
 //    static FeatureMapper featureMapper = new FeatureMapper()
@@ -62,10 +65,13 @@ class GateSerializer {
     }
 
     static public Document convertToDocument(Container container) {
+        logger.debug("Converting container to GATE document")
         Document document = Factory.newDocument(container.text)
+        logger.debug("Document created.")
         Map annotationSets = [:]
 
         container.steps.each { step ->
+            logger.debug("Processing step.")
             step.annotations.each { annotation ->
                 String setName = annotation.metadata.aSet ?: ''
                 AnnotationSet annotationSet = document.getAnnotations(setName)

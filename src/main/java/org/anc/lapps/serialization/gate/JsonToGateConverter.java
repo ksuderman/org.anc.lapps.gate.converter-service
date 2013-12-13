@@ -7,12 +7,16 @@ import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.Types;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Keith Suderman
  */
-public class JsonToGateConverter implements WebService
+public class JsonToGateConverter extends ConverterBase implements WebService
 {
+   protected static Logger logger = LoggerFactory.getLogger(JsonToGateConverter.class);
+
    public JsonToGateConverter()
    {
 
@@ -25,7 +29,7 @@ public class JsonToGateConverter implements WebService
 
    public long[] requires()
    {
-      return new long[] { Types.JSON_LD };
+      return new long[] { Types.JSON };
    }
 
    public Data configure(Data input)
@@ -35,11 +39,14 @@ public class JsonToGateConverter implements WebService
 
    public Data execute(Data input)
    {
-      if (input.getDiscriminator() != Types.JSON_LD) {
-         return DataFactory.error("Invalid input type. Expected JSON_LD (" + Types.JSON_LD + ")");
+      if (input.getDiscriminator() != Types.JSON) {
+         return DataFactory.error("Invalid input type. Expected JSON (" + Types.JSON + ")");
       }
+      logger.debug("Converting JSON to GATE.");
       Container container = new Container(input.getPayload());
+      logger.trace("Container created.");
       Document document = GateSerializer.convertToDocument(container);
+      logger.trace("Document created.");
       return new Data(Types.GATE, document.toXml());
    }
 }

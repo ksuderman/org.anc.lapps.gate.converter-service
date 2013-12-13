@@ -35,7 +35,7 @@
     <orderEntry type="library" name="Maven: org.apache.ivy:ivy:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:core:1.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:1.2.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-core:7.1" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-asm:3.1" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-compiler-jdt:3.7.1" level="project" />
