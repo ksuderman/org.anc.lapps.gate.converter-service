@@ -7,7 +7,8 @@ import org.lappsgrid.api.*;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.Types;
 
-import org.slf4j.*;
+//import org.slf4j.*;
+import org.anc.lapps.logging.*;
 
 /**
  * @author Keith Suderman
@@ -41,7 +42,7 @@ public class GateToJsonConverter extends ConverterBase implements WebService
       Data result;
       try
       {
-         logger.debug("Converting document to JSON");
+         logger.info("Converting document to JSON");
          Document document = Factory.newDocument(input.getPayload());
          logger.debug("Gate document created.");
          String json = GateSerializer.toJson(document);
@@ -53,7 +54,6 @@ public class GateToJsonConverter extends ConverterBase implements WebService
          logger.error("Unable to convert document.", e);
          result = DataFactory.error(e.getMessage());
       }
-      logger.debug("Returning JSON document.");
       return result;
    }
 }

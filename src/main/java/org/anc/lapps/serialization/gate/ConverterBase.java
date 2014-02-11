@@ -1,8 +1,9 @@
 package org.anc.lapps.serialization.gate;
 
 import gate.Gate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.anc.lapps.logging.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,42 +24,42 @@ public abstract class ConverterBase
       synchronized (initialized) {
          if (!initialized)
          {
+            logger.info("Initializing the GATE subsystem.");
             initialized = true;  // We only try this once.
             try
             {
-               logger.info("Configuring Gate.");
                File gateHome = new File(K.GATE_HOME);
                if (!gateHome.exists())
                {
-                  logger.error("Gate home not found: {}", gateHome.getPath());
+                  logger.error("Gate home not found: " + gateHome.getPath());
                   savedException = new FileNotFoundException(K.GATE_HOME);
                   return;
                }
-               logger.info("Gate home: {}", K.GATE_HOME);
+               logger.info("Gate home: " + K.GATE_HOME);
                File plugins = new File(K.PLUGINS_HOME);
                if (!plugins.exists())
                {
-                  logger.error("Gate plugins not found: {}", plugins.getPath());
+                  logger.error("Gate plugins not found: " + plugins.getPath());
                   savedException = new FileNotFoundException(K.PLUGINS_HOME);
                   return;
                }
-               logger.info("Plugins home: {}", K.PLUGINS_HOME);
+               logger.info("Plugins home: " + K.PLUGINS_HOME);
                File siteConfig = new File(K.SITE_CONFIG);
                if (!siteConfig.exists())
                {
-                  logger.error("Site config not found: {}", siteConfig.getPath());
+                  logger.error("Site config not found: " + siteConfig.getPath());
                   savedException = new FileNotFoundException(K.SITE_CONFIG);
                   return;
                }
-               logger.info("Site config: {}", K.SITE_CONFIG);
+               logger.info("Site config: " + K.SITE_CONFIG);
                File userConfig = new File(K.USER_CONFIG);
                if (!userConfig.exists())
                {
-                  logger.error("User config not found: {}", userConfig.getPath());
+                  logger.error("User config not found: " + userConfig.getPath());
                   savedException = new FileNotFoundException(K.USER_CONFIG);
                   return;
                }
-               logger.info("User config: {}", K.USER_CONFIG);
+               logger.info("User config: " + K.USER_CONFIG);
                Gate.setGateHome(gateHome);
                Gate.setSiteConfigFile(siteConfig);
                Gate.setPluginsHome(plugins);
@@ -81,7 +82,7 @@ public abstract class ConverterBase
                {
                   if (directory.isDirectory())
                   {
-                     logger.info("Registering plugin: {}", directory.getPath());
+                     logger.info("Registering plugin: " + directory.getPath());
                      Gate.getCreoleRegister().registerDirectories(directory.toURI().toURL());
                   }
                }
