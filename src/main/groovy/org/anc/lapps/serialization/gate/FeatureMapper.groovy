@@ -9,13 +9,13 @@ class FeatureMapper {
             'base':'lemma'
     ]
 
-//    Map map = [:]
+    Map map = [:]
 
     public FeatureMapper() {
-//        FEATURES.each { name, value ->
-//            map[name] = value
-//            map[valu] = name
-//        }
+        FEATURES.each { name, value ->
+            map[name] = value
+            map[value] = name
+        }
     }
 
     String get(String key) {

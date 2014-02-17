@@ -7,9 +7,9 @@ import gate.Factory
 import gate.FeatureMap
 import groovy.json.JsonSlurper
 import org.anc.lapps.serialization.*
-//import org.slf4j.Logger
-//import org.slf4j.LoggerFactory
-import org.anc.lapps.logging.*;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+//import org.anc.lapps.logging.*;
 
 /**
  * @author Keith Suderman
@@ -17,8 +17,8 @@ import org.anc.lapps.logging.*;
 class GateSerializer {
     private static Logger logger = LoggerFactory.getLogger(GateSerializer.class)
 
-//    static AnnotationMapper annotationMapper = new AnnotationMapper()
-//    static FeatureMapper featureMapper = new FeatureMapper()
+    static AnnotationMapper annotationMapper = new AnnotationMapper()
+    static FeatureMapper featureMapper = new FeatureMapper()
 
     static public String toJson(Document document) {
         return convertToContainer(document).toJson()
@@ -56,9 +56,10 @@ class GateSerializer {
             ++counter
             annotation.start = gateAnnotation.startNode.offset.longValue()
             annotation.end = gateAnnotation.endNode.offset.longValue()
-            annotation.label = gateAnnotation.type //annotationMapper[gateAnnotation.type]
+            annotation.label = annotationMapper.get(gateAnnotation.type)
             gateAnnotation.features.each { key, value ->
-                annotation.features[key] = value
+                def mappedKey = featureMapper.get(key)
+                annotation.features[mappedKey] = value
             }
             step.annotations << annotation
         }
@@ -69,7 +70,7 @@ class GateSerializer {
         logger.debug("Converting container to GATE document")
         Document document = Factory.newDocument(container.text)
         logger.debug("Document created.")
-        Map annotationSets = [:]
+        //Map annotationSets = [:]
 
         container.steps.each { step ->
             logger.debug("Processing step.")
@@ -82,10 +83,10 @@ class GateSerializer {
                 Integer id = annotation.metadata.gateId ?: -1
                 Long start = annotation.start
                 Long end = annotation.end
-                String label = annotation.label
+                String label = annotationMapper.get(annotation.label)
                 FeatureMap features = Factory.newFeatureMap()
                 annotation.features.each { name, value ->
-                    features.put(name, value)
+                    features.put(featureMapper.get(name), value)
                 }
                 annotationSet.add(id, start, end, label, features)
             }

@@ -9,13 +9,13 @@ class AnnotationMapper { //extends HashMap {
             'Sentence':'s'
     ]
 
-//    Map map = [:]
+    Map map = [:]
 
     public AnnotationMapper() {
-//        MAP.each { name, value ->
-//            map[name] = value
-//            map[value] = name
-//        }
+        MAP.each { name, value ->
+            map[name] = value
+            map[value] = name
+        }
     }
 
     String get(String key) {

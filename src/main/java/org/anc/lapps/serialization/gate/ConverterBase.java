@@ -1,9 +1,9 @@
 package org.anc.lapps.serialization.gate;
 
 import gate.Gate;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-import org.anc.lapps.logging.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+//import org.anc.lapps.logging.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
