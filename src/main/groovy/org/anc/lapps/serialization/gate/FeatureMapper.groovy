@@ -1,12 +1,14 @@
 package org.anc.lapps.serialization.gate
 
+import org.lappsgrid.vocabulary.Features
+
 /**
  * @author Keith Suderman
  */
 class FeatureMapper {
     private static final Map FEATURES = [
-            'category':'pos',
-            'base':'lemma'
+            'category':Features.CATEGORY,
+            'base':Features.LEMMA
     ]
 
     Map map = [:]

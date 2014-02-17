@@ -1,12 +1,14 @@
 package org.anc.lapps.serialization.gate
 
+import org.lappsgrid.vocabulary.*
+
 /**
  * @author Keith Suderman
  */
 class AnnotationMapper { //extends HashMap {
     static final Map MAP = [
-            'Token':'tok',
-            'Sentence':'s'
+            'Token':Annotations.TOKEN,
+            'Sentence':Annotations.SENTENCE
     ]
 
     Map map = [:]
