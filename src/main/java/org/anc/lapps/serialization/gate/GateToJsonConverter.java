@@ -7,8 +7,8 @@ import org.lappsgrid.api.*;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.Types;
 
-//import org.slf4j.*;
-import org.anc.lapps.logging.*;
+import org.slf4j.*;
+//import org.anc.lapps.logging.*;
 
 /**
  * @author Keith Suderman

@@ -7,9 +7,9 @@ import gate.Factory
 import gate.FeatureMap
 import groovy.json.JsonSlurper
 import org.anc.lapps.serialization.*
-//import org.slf4j.Logger
-//import org.slf4j.LoggerFactory
-import org.anc.lapps.logging.*;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+//import org.anc.lapps.logging.*;
 
 /**
  * @author Keith Suderman

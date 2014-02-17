@@ -8,9 +8,9 @@ import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.DiscriminatorRegistry;
 import org.lappsgrid.discriminator.Types;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-import org.anc.lapps.logging.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+//import org.anc.lapps.logging.*;
 
 /**
  * @author Keith Suderman

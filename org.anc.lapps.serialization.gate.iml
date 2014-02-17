@@ -89,8 +89,7 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.2.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient-cache:4.2.5" level="project" />
-    <orderEntry type="library" name="Maven: org.anc:common:3.1.1" level="project" />
-    <orderEntry type="module" module-name="logging" />
+    <orderEntry type="library" name="Maven: org.anc:common:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:service-grid-libs:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4.5" level="project" />
