@@ -7,7 +7,7 @@ import org.lappsgrid.vocabulary.Features
  */
 class FeatureMapper {
     private static final Map FEATURES = [
-            'category':Features.CATEGORY,
+            'category':Features.PART_OF_SPEECH,
             'base':Features.LEMMA
     ]
 
