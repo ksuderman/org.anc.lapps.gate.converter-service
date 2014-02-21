@@ -7,6 +7,7 @@ import gate.Factory
 import gate.FeatureMap
 import groovy.json.JsonSlurper
 import org.anc.lapps.serialization.*
+import org.lappsgrid.vocabulary.Metadata
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 //import org.anc.lapps.logging.*;
@@ -44,6 +45,10 @@ class GateSerializer {
         document.namedAnnotationSets.each { name, set ->
             counter = addAnnotationSet(set, step, counter)
         }
+        String producer = document.getFeatures().get(Metadata.PRODUCED_BY)
+        if (producer) {
+            step.metadata[Metadata.PRODUCED_BY] = producer
+        }
         container.steps << step
     }
 
@@ -72,8 +77,13 @@ class GateSerializer {
         logger.debug("Document created.")
         //Map annotationSets = [:]
 
+        List producers = []
         container.steps.each { step ->
             logger.debug("Processing step.")
+            String producer = step.metadata[Metadata.PRODUCED_BY]
+            if (producer) {
+                producers << producers
+            }
             step.annotations.each { annotation ->
                 String setName = annotation.metadata.aSet ?: ''
                 AnnotationSet annotationSet = document.getAnnotations(setName)
@@ -90,6 +100,9 @@ class GateSerializer {
                 }
                 annotationSet.add(id, start, end, label, features)
             }
+        }
+        if (producers.size() > 0) {
+            document.getFeatures().put(Metadata.PRODUCED_BY, producers.join(","));
         }
         return document
     }
