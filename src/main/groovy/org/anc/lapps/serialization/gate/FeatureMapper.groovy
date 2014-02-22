@@ -21,7 +21,7 @@ class FeatureMapper {
     }
 
     String get(String key) {
-        return FEATURES[key] ?: key
+        return map[key] ?: key
     }
 
 //    String getAt(String key) {

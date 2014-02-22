@@ -6,7 +6,6 @@ import static org.junit.Assert.*
 /**
  * @author Keith Suderman
  */
-@Ignore
 class AnnotationMapperTest {
 
     AnnotationMapper mapper
@@ -18,16 +17,14 @@ class AnnotationMapperTest {
 
     @Test
     void testToken() {
-        def expected = "tok"
-        def actual = mapper['Token']
-        assertTrue("Expected: ${expected} Actual: ${actual}", actual == expected)
+        assertTrue('token' == mapper['Token'])
+        assertTrue('Token' == mapper['token'])
     }
 
     @Test
     void testSentence() {
-        def expected = 's'
-        def actual = mapper['Sentence']
-        assertTrue("Expected: ${expected} Actual: ${actual}", actual == expected)
+        assertTrue('sentence' == mapper['Sentence'])
+        assertTrue('Sentence' == mapper['sentence'])
     }
 
     @Test

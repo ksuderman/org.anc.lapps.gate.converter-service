@@ -1,10 +1,14 @@
 package org.anc.lapps.serialization.gate
 
+import org.anc.util.Counter
+
 //import org.anc.lapps.client.RemoteService
 //import org.lappsgrid.api.*
 //import org.lappsgrid.discriminator.Types
 
 import org.junit.*
+import org.lappsgrid.vocabulary.Annotations
+
 import static org.junit.Assert.*
 
 import org.anc.lapps.serialization.*
@@ -46,6 +50,15 @@ public class GateSerializerTest {
 
     }
 
+    private void increment(Map map, String key) {
+        Counter count = map[key]
+        if (count == null) {
+            count = new Counter()
+            map[key] = count
+        }
+        count.increment()
+    }
+
     @Test
     void jsonToGateTest() {
         String json = ResourceLoader.loadString('test_file.json')
@@ -53,7 +66,34 @@ public class GateSerializerTest {
         Container container = new Container(json)
         //println container.toPrettyJson()
         Document document = GateSerializer.convertToDocument(container)
-        println document.toXml()
+//        Map sets = document.getNamedAnnotationSets()
+//        println "The document contains ${sets.size()} annotation sets."
+//        sets.each { String name, AnnotationSet set ->
+//            println "${name} contains ${set.size()} annotations"
+//        }
+        Map documentMap = [:] //[(Annotations.SENTENCE):0, (Annotations.TOKEN):0]
+        Map containerMap = [:] //[(Annotations.SENTENCE):0, (Annotations.TOKEN):0]
+        AnnotationSet set = document.getAnnotations()
+        Iterator it = set.iterator()
+        while (it.hasNext()) {
+            increment(documentMap, it.next().type)
+        }
+
+        container.steps.each { ProcessingStep step ->
+            step.annotations.each { annotation ->
+                increment(containerMap, annotation.label)
+            }
+        }
+
+        documentMap.each { name,value ->
+            assertNotNull("containerMap does not contain a value for ${name}", containerMap[name])
+            assertTrue("${name} values differ.", value == containerMap[name])
+        }
+
+        containerMap.each { name,value ->
+            assertNotNull("documentMap does not contain a value for ${name}", documentMap[name])
+            assertTrue("${name} values differ.", value == documentMap[name])
+        }
     }
 
     Document getDocument() {
