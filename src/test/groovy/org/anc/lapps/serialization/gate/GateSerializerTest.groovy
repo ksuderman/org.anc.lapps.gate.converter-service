@@ -28,7 +28,7 @@ public class GateSerializerTest {
         Gate.init()
     }
 
-    @Test
+    @Ignore
     void gateToJsonTest() {
         //setup()
         Document document = getDocument() //Factory.newDocument(new File('org.anc.lapps.serialization.gate/src/test/resources/test-file.xml').toURI().toURL())
@@ -36,7 +36,7 @@ public class GateSerializerTest {
         println container.toJson()
     }
 
-    @Test
+    @Ignore
     void testRoundTrip() {
         setup()
         Document document = getDocument() //Factory.newDocument(new File('org.anc.lapps.serialization.gate/src/test/resources/test-file.xml').toURI().toURL())
@@ -44,6 +44,14 @@ public class GateSerializerTest {
         document = GateSerializer.convertToDocument(container)
         println document.toXml()
 
+    }
+
+    @Test
+    void jsonToGateTest() {
+        String json = ResourceLoader.loadString('test_file.json')
+        assertTrue(json != null)
+        Container container = new Container(json)
+        println container.toPrettyJson()
     }
 
     Document getDocument() {
