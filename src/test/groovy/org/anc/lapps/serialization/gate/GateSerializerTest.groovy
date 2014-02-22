@@ -51,7 +51,9 @@ public class GateSerializerTest {
         String json = ResourceLoader.loadString('test_file.json')
         assertTrue(json != null)
         Container container = new Container(json)
-        println container.toPrettyJson()
+        //println container.toPrettyJson()
+        Document document = GateSerializer.convertToDocument(container)
+        println document.toXml()
     }
 
     Document getDocument() {
