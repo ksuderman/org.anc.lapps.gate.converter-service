@@ -71,6 +71,7 @@ public class GateSerializerTest {
 //        sets.each { String name, AnnotationSet set ->
 //            println "${name} contains ${set.size()} annotations"
 //        }
+        AnnotationMapper mapper = new AnnotationMapper()
         Map documentMap = [:] //[(Annotations.SENTENCE):0, (Annotations.TOKEN):0]
         Map containerMap = [:] //[(Annotations.SENTENCE):0, (Annotations.TOKEN):0]
         AnnotationSet set = document.getAnnotations()
@@ -86,13 +87,13 @@ public class GateSerializerTest {
         }
 
         documentMap.each { name,value ->
-            assertNotNull("containerMap does not contain a value for ${name}", containerMap[name])
-            assertTrue("${name} values differ.", value == containerMap[name])
+            assertNotNull("containerMap does not contain a value for ${name}", containerMap[mapper[name]])
+            assertTrue("${name} values differ.", value == containerMap[mapper[name]])
         }
 
         containerMap.each { name,value ->
-            assertNotNull("documentMap does not contain a value for ${name}", documentMap[name])
-            assertTrue("${name} values differ.", value == documentMap[name])
+            assertNotNull("documentMap does not contain a value for ${name}", documentMap[mapper[name]])
+            assertTrue("${name} values differ.", value == documentMap[mapper[name]])
         }
     }
 

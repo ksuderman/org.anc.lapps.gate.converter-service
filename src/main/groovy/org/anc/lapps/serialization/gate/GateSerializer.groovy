@@ -100,7 +100,7 @@ class GateSerializer {
                 Long end = annotation.end
                 String label = annotationMapper.get(annotation.label)
                 //println "${start}-${end} ${label}"
-                println "${annotation.label} -> ${label}"
+//                println "${annotation.label} -> ${label}"
                 FeatureMap features = Factory.newFeatureMap()
                 annotation.features.each { name, value ->
                     features.put(featureMapper.get(name), value)
