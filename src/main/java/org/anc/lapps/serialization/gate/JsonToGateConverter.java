@@ -1,6 +1,7 @@
 package org.anc.lapps.serialization.gate;
 
 import gate.Document;
+import gate.Factory;
 import org.anc.lapps.serialization.Container;
 import org.anc.lapps.serialization.Serializer;
 import org.lappsgrid.api.Data;
@@ -51,6 +52,8 @@ public class JsonToGateConverter extends ConverterBase implements WebService
       logger.trace("Container created.");
       Document document = GateSerializer.convertToDocument(container);
       logger.trace("Document created.");
-      return new Data(Types.GATE, document.toXml());
+      Data result = new Data(Types.GATE, document.toXml());
+      Factory.deleteResource(document);
+      return result;
    }
 }
