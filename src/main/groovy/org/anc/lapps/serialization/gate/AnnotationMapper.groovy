@@ -3,6 +3,9 @@ package org.anc.lapps.serialization.gate
 import org.lappsgrid.vocabulary.*
 
 /**
+ * Maps GATE annotation names (types) to LAPPS annotation names anc
+ * vice versa
+ *
  * @author Keith Suderman
  */
 class AnnotationMapper { //extends HashMap {
@@ -21,7 +24,7 @@ class AnnotationMapper { //extends HashMap {
     }
 
     String get(String key) {
-        return MAP[key] ?: key
+        return map[key] ?: key
     }
 
 //    String getAt(String key) {

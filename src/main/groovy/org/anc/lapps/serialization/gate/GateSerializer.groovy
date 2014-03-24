@@ -78,11 +78,16 @@ class GateSerializer {
         //Map annotationSets = [:]
 
         List producers = []
+        List contains = []
         container.steps.each { step ->
             logger.debug("Processing step.")
             String producer = step.metadata[Metadata.PRODUCED_BY]
             if (producer) {
-                producers << producers
+                producers << producer
+            }
+            String type = step.metadata[Metadata.CONTAINS]
+            if (type) {
+                contains << type
             }
             step.annotations.each { annotation ->
                 String setName = annotation.metadata.aSet ?: ''
@@ -94,15 +99,26 @@ class GateSerializer {
                 Long start = annotation.start
                 Long end = annotation.end
                 String label = annotationMapper.get(annotation.label)
+                //println "${start}-${end} ${label}"
+//                println "${annotation.label} -> ${label}"
                 FeatureMap features = Factory.newFeatureMap()
                 annotation.features.each { name, value ->
                     features.put(featureMapper.get(name), value)
                 }
-                annotationSet.add(id, start, end, label, features)
+                if (id > 0) {
+                    annotationSet.add(id, start, end, label, features)
+                }
+                else {
+                    annotationSet.add(start, end, label, features)
+                }
+
             }
         }
         if (producers.size() > 0) {
             document.getFeatures().put(Metadata.PRODUCED_BY, producers.join(","));
+        }
+        if (contains.size() > 0) {
+            document.getFeatures().put(Metadata.CONTAINS, contains.join(","));
         }
         return document
     }
