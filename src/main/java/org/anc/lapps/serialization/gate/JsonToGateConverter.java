@@ -42,7 +42,7 @@ public class JsonToGateConverter extends ConverterBase implements WebService
 
    public Data execute(Data input)
    {
-      System.err.println("Invoking the JsonToGateConverter service.");
+      //System.err.println("Invoking the JsonToGateConverter service.");
       if (input.getDiscriminator() != Types.JSON) {
          logger.error("Invalid input discriminator. Expected JSON but found " + DiscriminatorRegistry.get(input.getDiscriminator()));
          return DataFactory.error("Invalid input type. Expected JSON (" + Types.JSON + ")");
