@@ -5,6 +5,7 @@ import gate.Document
 import gate.AnnotationSet
 import gate.Factory
 import gate.FeatureMap
+import gate.util.InvalidOffsetException
 import groovy.json.JsonSlurper
 import org.anc.lapps.serialization.*
 import org.lappsgrid.vocabulary.Metadata
@@ -105,13 +106,18 @@ class GateSerializer {
                 annotation.features.each { name, value ->
                     features.put(featureMapper.get(name), value)
                 }
-                if (id > 0) {
-                    annotationSet.add(id, start, end, label, features)
+                try {
+                    if (id > 0) {
+                        annotationSet.add(id, start, end, label, features)
+                    }
+                    else {
+                        annotationSet.add(start, end, label, features)
+                    }
                 }
-                else {
-                    annotationSet.add(start, end, label, features)
+                catch (InvalidOffsetException e) {
+                    logger.error("Unable to add {} at offset {}", label, start);
+                    throw e
                 }
-
             }
         }
         if (producers.size() > 0) {
