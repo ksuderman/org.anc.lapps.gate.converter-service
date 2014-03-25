@@ -1,6 +1,7 @@
 package org.anc.lapps.serialization.gate;
 
 import gate.Document;
+import gate.Factory;
 import org.anc.lapps.serialization.Container;
 import org.anc.lapps.serialization.Serializer;
 import org.lappsgrid.api.Data;
@@ -41,16 +42,28 @@ public class JsonToGateConverter extends ConverterBase implements WebService
 
    public Data execute(Data input)
    {
-      System.err.println("Invoking the JsonToGateConverter service.");
+      //System.err.println("Invoking the JsonToGateConverter service.");
       if (input.getDiscriminator() != Types.JSON) {
          logger.error("Invalid input discriminator. Expected JSON but found " + DiscriminatorRegistry.get(input.getDiscriminator()));
          return DataFactory.error("Invalid input type. Expected JSON (" + Types.JSON + ")");
       }
-      logger.debug("Converting JSON to GATE.");
-      Container container = new Container(input.getPayload());
-      logger.trace("Container created.");
-      Document document = GateSerializer.convertToDocument(container);
-      logger.trace("Document created.");
-      return new Data(Types.GATE, document.toXml());
+      Data result = null;
+      try
+      {
+         logger.debug("Converting JSON to GATE.");
+         Container container = new Container(input.getPayload());
+         logger.trace("Container created.");
+         Document document = GateSerializer.convertToDocument(container);
+         logger.trace("Document created.");
+         result = new Data(Types.GATE, document.toXml());
+         Factory.deleteResource(document);
+      }
+      catch (Exception e)
+      {
+         String message = "Unable to convert to GATE document";
+         logger.error(message, e);
+         result = DataFactory.error(message, e);
+      }
+      return result;
    }
 }

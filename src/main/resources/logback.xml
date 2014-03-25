@@ -1,10 +1,11 @@
-<configuration debug="true" scan="true" scanPeriod="60 seconds">
+<configuration debug="true">
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%date %-5level %logger:%method:%line - %msg%n</pattern>
         </encoder>
     </appender>
+    <!--
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>/var/log/lapps/converter.log</file>
         <append>true</append>
@@ -23,7 +24,7 @@
             <pattern>%date %-5level %logger:%method:%line - %msg%n</pattern>
         </encoder>
     </appender>
-
+    -->
     <logger name="org.springframework.aop" level="error"/>
     <logger name="org.anc" level="warn"/>
     <logger name="org.anc.lapps" level="info"/>

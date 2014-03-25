@@ -34,9 +34,9 @@
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ivy:ivy:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:api:1.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:core:1.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:1.2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:vocabulary:0.9.3" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:core:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:1.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:vocabulary:0.9.4" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-core:7.1" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-asm:3.1" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-compiler-jdt:3.7.1" level="project" />
@@ -90,7 +90,7 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.2.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient-cache:4.2.5" level="project" />
-    <orderEntry type="library" name="Maven: org.anc:common:3.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.anc:common:3.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:service-grid-libs:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4.5" level="project" />

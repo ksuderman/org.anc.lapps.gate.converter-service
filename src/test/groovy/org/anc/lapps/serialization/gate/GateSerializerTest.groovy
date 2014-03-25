@@ -1,10 +1,14 @@
 package org.anc.lapps.serialization.gate
 
+import org.anc.util.Counter
+
 //import org.anc.lapps.client.RemoteService
 //import org.lappsgrid.api.*
 //import org.lappsgrid.discriminator.Types
 
 import org.junit.*
+import org.lappsgrid.vocabulary.Annotations
+
 import static org.junit.Assert.*
 
 import org.anc.lapps.serialization.*
@@ -28,7 +32,7 @@ public class GateSerializerTest {
         Gate.init()
     }
 
-    @Test
+    @Ignore
     void gateToJsonTest() {
         //setup()
         Document document = getDocument() //Factory.newDocument(new File('org.anc.lapps.serialization.gate/src/test/resources/test-file.xml').toURI().toURL())
@@ -36,7 +40,7 @@ public class GateSerializerTest {
         println container.toJson()
     }
 
-    @Test
+    @Ignore
     void testRoundTrip() {
         setup()
         Document document = getDocument() //Factory.newDocument(new File('org.anc.lapps.serialization.gate/src/test/resources/test-file.xml').toURI().toURL())
@@ -44,6 +48,53 @@ public class GateSerializerTest {
         document = GateSerializer.convertToDocument(container)
         println document.toXml()
 
+    }
+
+    private void increment(Map map, String key) {
+        Counter count = map[key]
+        if (count == null) {
+            count = new Counter()
+            map[key] = count
+        }
+        count.increment()
+    }
+
+    @Test
+    void jsonToGateTest() {
+        String json = ResourceLoader.loadString('test_file.json')
+        assertTrue(json != null)
+        Container container = new Container(json)
+        //println container.toPrettyJson()
+        Document document = GateSerializer.convertToDocument(container)
+//        Map sets = document.getNamedAnnotationSets()
+//        println "The document contains ${sets.size()} annotation sets."
+//        sets.each { String name, AnnotationSet set ->
+//            println "${name} contains ${set.size()} annotations"
+//        }
+        AnnotationMapper mapper = new AnnotationMapper()
+        Map documentMap = [:] //[(Annotations.SENTENCE):0, (Annotations.TOKEN):0]
+        Map containerMap = [:] //[(Annotations.SENTENCE):0, (Annotations.TOKEN):0]
+        AnnotationSet set = document.getAnnotations()
+        Iterator it = set.iterator()
+        while (it.hasNext()) {
+            increment(documentMap, it.next().type)
+        }
+
+        container.steps.each { ProcessingStep step ->
+            step.annotations.each { annotation ->
+                increment(containerMap, annotation.label)
+            }
+        }
+
+        documentMap.each { name,value ->
+            assertNotNull("containerMap does not contain a value for ${name}", containerMap[mapper[name]])
+            assertTrue("${name} values differ.", value == containerMap[mapper[name]])
+        }
+
+        containerMap.each { name,value ->
+            assertNotNull("documentMap does not contain a value for ${name}", documentMap[mapper[name]])
+            assertTrue("${name} values differ.", value == documentMap[mapper[name]])
+        }
     }
 
     Document getDocument() {

@@ -40,10 +40,11 @@ public class GateToJsonConverter extends ConverterBase implements WebService
    public Data execute(Data input)
    {
       Data result;
+      Document document = null;
       try
       {
          logger.info("Converting document to JSON");
-         Document document = Factory.newDocument(input.getPayload());
+         document = Factory.newDocument(input.getPayload());
          logger.debug("Gate document created.");
          String json = GateSerializer.toJson(document);
          logger.debug("Document serialized to JSON.");
@@ -53,6 +54,10 @@ public class GateToJsonConverter extends ConverterBase implements WebService
       {
          logger.error("Unable to convert document.", e);
          result = DataFactory.error(e.getMessage());
+      }
+      finally
+      {
+         Factory.deleteResource(document);
       }
       return result;
    }
