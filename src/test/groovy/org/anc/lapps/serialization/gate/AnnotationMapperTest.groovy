@@ -6,6 +6,7 @@ import static org.junit.Assert.*
 /**
  * @author Keith Suderman
  */
+@Ignore  // No sense testing a deprecated class.
 class AnnotationMapperTest {
 
     AnnotationMapper mapper
