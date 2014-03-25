@@ -6,6 +6,8 @@ import org.lappsgrid.vocabulary.*
  * Maps GATE annotation names (types) to LAPPS annotation names anc
  * vice versa
  *
+ * @deprecated The GATE annotation names match the LAPPS vocabulary names.
+ *
  * @author Keith Suderman
  */
 class AnnotationMapper { //extends HashMap {
