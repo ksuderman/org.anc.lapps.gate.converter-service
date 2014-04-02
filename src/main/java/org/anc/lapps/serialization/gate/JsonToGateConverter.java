@@ -3,7 +3,6 @@ package org.anc.lapps.serialization.gate;
 import gate.Document;
 import gate.Factory;
 import org.anc.lapps.serialization.Container;
-import org.anc.lapps.serialization.Serializer;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
