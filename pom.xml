@@ -11,14 +11,14 @@
     <groupId>org.anc.lapps.serialization</groupId>
     <artifactId>gate-serialization</artifactId>
     <version>0.4.0-SNAPSHOT</version>
-    <name>LAPPS Gate Serialization Services</name>
+    <name>Services: GATE Converters</name>
     <packaging>war</packaging>
     <properties>
         <lapps.version>1.0.1</lapps.version>
         <lapps.core.version>1.1.0</lapps.core.version>
         <discriminator.version>1.2.2</discriminator.version>
-        <vocabulary.version>0.9.4</vocabulary.version>
-        <serialization.version>0.12.1</serialization.version>
+        <vocabulary.version>0.10.0-SNAPSHOT</vocabulary.version>
+        <serialization.version>0.13.0-SNAPSHOT</serialization.version>
         <anc.commons.version>3.4.0</anc.commons.version>
     </properties>
     <build>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>org.anc.lapps.gate</groupId>
             <artifactId>serialization</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
