@@ -14,12 +14,15 @@
     <name>Services: GATE Converters</name>
     <packaging>war</packaging>
     <properties>
-        <lapps.version>1.0.1</lapps.version>
+        <lapps.api.version>1.0.1</lapps.api.version>
         <lapps.core.version>1.1.0</lapps.core.version>
-        <discriminator.version>1.2.2</discriminator.version>
-        <vocabulary.version>0.10.0-SNAPSHOT</vocabulary.version>
-        <serialization.version>0.13.0-SNAPSHOT</serialization.version>
+        <lapps.discriminator.version>1.2.3</lapps.discriminator.version>
+        <lapps.vocabulary.version>0.10.0-SNAPSHOT</lapps.vocabulary.version>
+        <lapps.serialization.version>0.13.0-SNAPSHOT</lapps.serialization.version>
         <anc.commons.version>3.4.0</anc.commons.version>
+        <groovy.version>2.2.0</groovy.version>
+        <ivy.versaion>2.2.0</ivy.versaion>
+        <gate.version>7.1</gate.version>
     </properties>
     <build>
         <finalName>GateConverter#${project.version}</finalName>
@@ -56,23 +59,23 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>2.2.0</version>
+            <version>${groovy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.ivy</groupId>
             <artifactId>ivy</artifactId>
-            <version>2.2.0</version>
+            <version>${ivy.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.anc.lapps.gate</groupId>
             <artifactId>serialization</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
+            <version>${lapps.serialization.version}</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>api</artifactId>
-            <version>${lapps.version}</version>
+            <version>${lapps.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
@@ -82,27 +85,27 @@
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>discriminator</artifactId>
-            <version>${discriminator.version}</version>
+            <version>${lapps.discriminator.version}</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>vocabulary</artifactId>
-            <version>${vocabulary.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>uk.ac.gate</groupId>
-            <artifactId>gate-core</artifactId>
-            <version>7.1</version>
+            <version>${lapps.vocabulary.version}</version>
         </dependency>
         <dependency>
             <groupId>org.anc.lapps</groupId>
             <artifactId>serialization</artifactId>
-            <version>${serialization.version}</version>
+            <version>${lapps.serialization.version}</version>
         </dependency>
         <dependency>
             <groupId>org.anc</groupId>
             <artifactId>common</artifactId>
             <version>${anc.commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.ac.gate</groupId>
+            <artifactId>gate-core</artifactId>
+            <version>7.1</version>
         </dependency>
     </dependencies>
 </project>
