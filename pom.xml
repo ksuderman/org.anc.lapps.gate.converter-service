@@ -19,9 +19,10 @@
         <lapps.discriminator.version>1.2.3</lapps.discriminator.version>
         <lapps.vocabulary.version>0.10.0-SNAPSHOT</lapps.vocabulary.version>
         <lapps.serialization.version>0.13.0-SNAPSHOT</lapps.serialization.version>
+        <gate.serialization.version>1.1.0-SNAPSHOT</gate.serialization.version>
         <anc.commons.version>3.4.0</anc.commons.version>
         <groovy.version>2.2.0</groovy.version>
-        <ivy.versaion>2.2.0</ivy.versaion>
+        <ivy.version>2.2.0</ivy.version>
         <gate.version>7.1</gate.version>
     </properties>
     <build>
@@ -70,7 +71,7 @@
         <dependency>
             <groupId>org.anc.lapps.gate</groupId>
             <artifactId>serialization</artifactId>
-            <version>${lapps.serialization.version}</version>
+            <version>${gate.serialization.version}</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
