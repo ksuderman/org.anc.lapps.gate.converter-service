@@ -1,14 +1,14 @@
-package org.anc.lapps.serialization.gate;
+package org.anc.lapps.converters.gate;
 
 import gate.Document;
 import gate.Factory;
 import gate.creole.ResourceInstantiationException;
-import org.lappsgrid.api.*;
+import org.lappsgrid.api.Data;
+import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.Types;
-
-import org.slf4j.*;
-//import org.anc.lapps.logging.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Keith Suderman

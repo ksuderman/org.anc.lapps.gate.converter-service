@@ -1,4 +1,4 @@
-package org.anc.lapps.serialization.gate;
+package org.anc.lapps.converters.gate;
 
 import org.anc.constants.Constants;
 

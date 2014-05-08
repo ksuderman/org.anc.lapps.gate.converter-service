@@ -1,4 +1,4 @@
-package org.anc.lapps.serialization.gate;
+package org.anc.lapps.converters.gate;
 
 import gate.Gate;
 import org.slf4j.Logger;
@@ -68,7 +68,15 @@ public abstract class ConverterBase
                try
                {
                   logger.info("Initializing GATE");
+                  Gate.runInSandbox(true);
                   Gate.init();
+                  logger.info("GATE has been initialized.");
+               }
+               catch (RuntimeException e)
+               {
+                  logger.error("Error initializing GATE.", e);
+                  savedException = e;
+                  return;
                }
                catch (Exception e)
                {
@@ -77,15 +85,15 @@ public abstract class ConverterBase
                   return;
                }
 
-               File[] files = plugins.listFiles();
-               for (File directory : files)
-               {
-                  if (directory.isDirectory())
-                  {
-                     logger.info("Registering plugin: " + directory.getPath());
-                     Gate.getCreoleRegister().registerDirectories(directory.toURI().toURL());
-                  }
-               }
+//               File[] files = plugins.listFiles();
+//               for (File directory : files)
+//               {
+//                  if (directory.isDirectory())
+//                  {
+//                     logger.info("Registering plugin: " + directory.getPath());
+//                     Gate.getCreoleRegister().registerDirectories(directory.toURI().toURL());
+//                  }
+//               }
             }
             catch (Exception e)
             {
@@ -94,6 +102,7 @@ public abstract class ConverterBase
             }
 
          }
+         logger.info("GATE has been initialized.");
       }
 }
 }

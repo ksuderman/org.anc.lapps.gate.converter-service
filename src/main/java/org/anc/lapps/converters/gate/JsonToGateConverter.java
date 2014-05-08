@@ -1,9 +1,8 @@
-package org.anc.lapps.serialization.gate;
+package org.anc.lapps.converters.gate;
 
 import gate.Document;
 import gate.Factory;
 import org.anc.lapps.serialization.Container;
-import org.anc.lapps.serialization.Serializer;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
@@ -11,7 +10,6 @@ import org.lappsgrid.discriminator.DiscriminatorRegistry;
 import org.lappsgrid.discriminator.Types;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.anc.lapps.logging.*;
 
 /**
  * @author Keith Suderman
