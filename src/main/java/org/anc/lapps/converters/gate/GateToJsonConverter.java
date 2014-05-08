@@ -3,7 +3,6 @@ package org.anc.lapps.converters.gate;
 import gate.Document;
 import gate.Factory;
 import gate.creole.ResourceInstantiationException;
-import org.anc.lapps.gate.serialization.GateSerializer;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;

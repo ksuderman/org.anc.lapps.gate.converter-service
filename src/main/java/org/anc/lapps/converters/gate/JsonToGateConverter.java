@@ -2,7 +2,6 @@ package org.anc.lapps.converters.gate;
 
 import gate.Document;
 import gate.Factory;
-import org.anc.lapps.gate.serialization.GateSerializer;
 import org.anc.lapps.serialization.Container;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
