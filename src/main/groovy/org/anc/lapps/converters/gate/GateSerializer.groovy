@@ -17,7 +17,7 @@ class GateSerializer {
     private static Logger logger = LoggerFactory.getLogger(GateSerializer.class)
 
 //    static AnnotationMapper annotationMapper = new AnnotationMapper()
-//    static FeatureMapper featureMapper = new FeatureMapper()
+    static FeatureMapper featureMapper = new FeatureMapper()
 
     static public String toJson(Document document) {
         logger.debug("Generating JSON")
@@ -39,13 +39,12 @@ class GateSerializer {
     }
 
     static public void addToContainer(Container container, Document document) {
-        int counter = -1
         ProcessingStep step = new ProcessingStep()
-        AnnotationSet aSet = document.getAnnotations()
-        counter = addAnnotationSet(aSet, step, counter)
-        document.namedAnnotationSets.each { name, set ->
+        AnnotationSet set = document.getAnnotations()
+        addAnnotationSet(set, step)
+        document.namedAnnotationSets.each { name, aset ->
             logger.debug("Processing annotation set {}", name)
-            counter = addAnnotationSet(set, step, counter)
+            addAnnotationSet(aset, step)
         }
 
         // TODO Need to filter out the document features added by GATE from the
@@ -74,42 +73,41 @@ class GateSerializer {
             }
         }
         container.steps << step
-        logger.debug("Document added to container.")
+        //logger.debug("Document added to container.")
     }
 
-    private static int addAnnotationSet(AnnotationSet set, ProcessingStep step, int counter) {
+    private static void addAnnotationSet(AnnotationSet set, ProcessingStep step) {
         set.each { gateAnnotation ->
             Annotation annotation = new Annotation()
-            annotation.metadata.aSet = set.getName()
-            annotation.metadata.gateId = gateAnnotation.getId()
-            annotation.id = "${++counter}"
-            ++counter
+            String setName = set.getName()
+            if (setName != null) {
+                annotation.metadata['gate:set'] = setName
+            }
+            annotation.id = gateAnnotation.getId()
             annotation.start = gateAnnotation.startNode.offset.longValue()
             annotation.end = gateAnnotation.endNode.offset.longValue()
             //TODO map annotation names.
 //            annotation.label = annotationMapper.get(gateAnnotation.type)
             annotation.label = gateAnnotation.type
             gateAnnotation.features.each { key, value ->
-                // TODO map feature names
-//                def mappedKey = featureMapper.get(key)
-//                annotation.features[mappedKey] = value
-                annotation.features[key] = value
+                def mappedKey = featureMapper.get(key)
+                annotation.features[mappedKey] = value
+//                annotation.features[key] = value
             }
             step.annotations << annotation
         }
-        return counter
     }
 
     static public Document convertToDocument(Container container) {
-        logger.debug("Converting container to GATE document")
+        //logger.debug("Converting container to GATE document")
         Document document = gate.Factory.newDocument(container.text)
-        logger.debug("Document created.")
+        //logger.debug("Document created.")
         //Map annotationSets = [:]
 
         List list = []
         int i = 0
         container.steps.each { step ->
-            logger.debug("Processing step ${++i}.")
+            //logger.debug("Processing step ${++i}.")
             Map map = step.metadata.contains
             if (map) {
                 list << new ListData(map:map, step:i);
@@ -131,8 +129,8 @@ class GateSerializer {
                 FeatureMap features = gate.Factory.newFeatureMap()
                 annotation.features.each { name, value ->
                     // TODO map feature names
-//                    features.put(featureMapper.get(name), value)
-                    features.put(name, value)
+                    features.put(featureMapper.get(name), value)
+//                    features.put(name, value)
                 }
                 try {
                     if (id > 0) {
@@ -143,7 +141,7 @@ class GateSerializer {
                     }
                 }
                 catch (InvalidOffsetException e) {
-                    logger.error("Unable to add {} at offset {}", label, start);
+                    //logger.error("Unable to add {} at offset {}", label, start);
                     throw e
                 }
             }
