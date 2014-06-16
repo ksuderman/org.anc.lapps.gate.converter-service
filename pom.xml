@@ -30,51 +30,40 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
                 <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <verbose>true</verbose>
+                    <annotationProcessors>
+                        <annotationProcessor>org.lappsgrid.experimental.annotation.processing.MetadataProcessor</annotationProcessor>
+                    </annotationProcessors>
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.6.0-01</version>
+                        <groupId>org.lappsgrid</groupId>
+                        <artifactId>discriminator</artifactId>
+                        <version>2.0.0-SNAPSHOT</version>
+                        <optional>true</optional>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-eclipse-compiler</artifactId>
-                <version>2.6.0-01</version>
-                <extensions>true</extensions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat6-maven-plugin</artifactId>
-                <version>2.0</version>
             </plugin>
         </plugins>
     </build>
     <dependencies>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>${groovy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ivy</groupId>
-            <artifactId>ivy</artifactId>
-            <version>${ivy.version}</version>
+            <groupId>org.lappsgrid.experimental</groupId>
+            <artifactId>annotations</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <!--
+        <dependency>
+            <groupId>org.lappsgrid.experimental</groupId>
+            <artifactId>annotation-processor</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.anc.lapps.gate</groupId>
             <artifactId>serialization</artifactId>
             <version>${gate.serialization.version}</version>
         </dependency>
-        -->
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>api</artifactId>

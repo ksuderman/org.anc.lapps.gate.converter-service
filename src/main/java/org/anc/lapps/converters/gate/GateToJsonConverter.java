@@ -3,33 +3,31 @@ package org.anc.lapps.converters.gate;
 import gate.Document;
 import gate.Factory;
 import gate.creole.ResourceInstantiationException;
+import org.anc.lapps.gate.serialization.GateSerializer;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.Types;
+import org.lappsgrid.discriminator.Uri;
+import org.lappsgrid.experimental.annotations.ServiceMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author Keith Suderman
  */
+@ServiceMetadata(
+        description = "Converts GATE documents to the LAPPS JSON/LD format.",
+        inFormat = "lapps",
+        outFormat = "gate"
+)
 public class GateToJsonConverter extends ConverterBase implements WebService
 {
    private static Logger logger = LoggerFactory.getLogger(GateToJsonConverter.class);
 
    public GateToJsonConverter()
    {
-
-   }
-
-   public long[] produces()
-   {
-      return new long[] { Types.JSON };
-   }
-
-   public long[] requires()
-   {
-      return new long[] { Types.GATE };
+      super(GateToJsonConverter.class);
    }
 
    public Data configure(Data input)
@@ -48,7 +46,7 @@ public class GateToJsonConverter extends ConverterBase implements WebService
          logger.debug("Gate document created.");
          String json = GateSerializer.toJson(document);
          logger.debug("Document serialized to JSON.");
-         result = new Data(Types.JSON, json);
+         result = new Data(Uri.JSON, json);
       }
       catch (ResourceInstantiationException e)
       {

@@ -2,35 +2,34 @@ package org.anc.lapps.converters.gate;
 
 import gate.Document;
 import gate.Factory;
+import org.anc.lapps.gate.serialization.GateSerializer;
 import org.anc.lapps.serialization.Container;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
+import org.lappsgrid.discriminator.Discriminator;
 import org.lappsgrid.discriminator.DiscriminatorRegistry;
 import org.lappsgrid.discriminator.Types;
+import org.lappsgrid.discriminator.Uri;
+import org.lappsgrid.experimental.annotations.ServiceMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author Keith Suderman
  */
+@ServiceMetadata(
+        description = "Converts LAPPS JSON/LD into GATE documents.",
+        inFormat = "lapps",
+        outFormat = "gate"
+)
 public class JsonToGateConverter extends ConverterBase implements WebService
 {
    protected static Logger logger = LoggerFactory.getLogger(JsonToGateConverter.class);
 
    public JsonToGateConverter()
    {
-
-   }
-
-   public long[] produces()
-   {
-      return new long[] { Types.GATE };
-   }
-
-   public long[] requires()
-   {
-      return new long[] { Types.JSON };
+      super(JsonToGateConverter.class);
    }
 
    public Data configure(Data input)
@@ -40,8 +39,8 @@ public class JsonToGateConverter extends ConverterBase implements WebService
 
    public Data execute(Data input)
    {
-      //System.err.println("Invoking the JsonToGateConverter service.");
-      if (input.getDiscriminator() != Types.JSON) {
+      Discriminator discriminator = DiscriminatorRegistry.getByUri(input.getDiscriminator());
+      if (discriminator.getId() != Types.JSON) {
          logger.error("Invalid input discriminator. Expected JSON but found " + DiscriminatorRegistry.get(input.getDiscriminator()));
          return DataFactory.error("Invalid input type. Expected JSON (" + Types.JSON + ")");
       }
@@ -53,7 +52,7 @@ public class JsonToGateConverter extends ConverterBase implements WebService
          logger.trace("Container created.");
          Document document = GateSerializer.convertToDocument(container);
          logger.trace("Document created.");
-         result = new Data(Types.GATE, document.toXml());
+         result = new Data(Uri.GATE, document.toXml());
          Factory.deleteResource(document);
       }
       catch (Exception e)
