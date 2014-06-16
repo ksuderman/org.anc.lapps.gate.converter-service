@@ -30,17 +30,20 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/groovy" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/groovy-stubs" />
+      <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="org.lappsgrid.serialization" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ivy:ivy:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:core:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:vocabulary:0.10.0-SNAPSHOT" level="project" />
-    <orderEntry type="module" module-name="org.anc.lapps.serialization" />
+    <orderEntry type="library" name="Maven: org.anc.lapps:serialization:0.13.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.1" level="project" />
