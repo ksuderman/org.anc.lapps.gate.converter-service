@@ -2,8 +2,6 @@ package org.anc.lapps.converters.gate
 
 import gate.Gate
 import org.anc.lapps.gate.serialization.GateSerializer
-import org.anc.lapps.serialization.Container
-import org.anc.lapps.serialization.ProcessingStep
 import org.anc.resource.ResourceLoader
 import org.junit.After
 import org.junit.Before
@@ -19,10 +17,12 @@ import static org.junit.Assert.*
 import org.lappsgrid.api.Data
 import org.lappsgrid.api.WebService
 import org.lappsgrid.core.DataFactory
+import org.lappsgrid.serialization.*
 
 /**
  * @author Keith Suderman
  */
+@Ignore
 class SerializerTest {
     String xml
     Data data
@@ -45,14 +45,14 @@ class SerializerTest {
         data = null
     }
 
-    @Ignore
+    @Test
     void testSerializer() {
         gate.Document document = gate.Factory.newDocument(xml)
         String json = GateSerializer.toPrettyJson(document)
         Container container = new Container(json)
-        int nSteps = container.steps.size()
+        int nSteps = container.views.size()
         assertTrue("Wrong number of steps. Expected 1 found ${nSteps}", nSteps == 1)
-        ProcessingStep step = container.steps[0]
+        View step = container.views[0]
         int nAnnotations = step.annotations.count { it.type == 'Token' }
         assertTrue("Wrong number of annotations. Expected 7 found ${nAnnotations}", nAnnotations == 7)
         assertNotNull("Step does not contain tokens.", step.metadata?.contains.Token)
@@ -65,9 +65,9 @@ class SerializerTest {
         assertTrue(result.payload, result.discriminator != Types.ERROR)
         assertTrue(result.discriminator == Types.JSON)
         Container container = new Container(result.payload)
-        int nSteps = container.steps.size()
+        int nSteps = container.views.size()
         assertTrue("Wrong number of steps. Expected 1 found ${nSteps}", nSteps == 1)
-        ProcessingStep step = container.steps[0]
+        View step = container.views[0]
         int nAnnotations = step.annotations.count { it.type == 'Token' }
         assertTrue("Wrong number of annotations. Expected 7 found ${nAnnotations}", nAnnotations == 7)
         assertNotNull("Step does not contain tokens.", step.metadata?.contains.Token)

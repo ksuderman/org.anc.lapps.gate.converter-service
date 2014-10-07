@@ -15,6 +15,10 @@ import java.io.*;
 /**
  * @author Keith Suderman
  */
+@CommonMetadata(
+	vendor = "http://www.anc.org",
+	license = "apache2"
+)
 public abstract class ConverterBase
 {
    private static final Logger logger = LoggerFactory.getLogger(ConverterBase.class);

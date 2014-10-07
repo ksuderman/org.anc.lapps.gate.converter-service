@@ -19,11 +19,9 @@ import org.slf4j.LoggerFactory;
  * @author Keith Suderman
  */
 @ServiceMetadata(
-		  vendor = "http://www.anc.org",
-		  license = "apache2",
-        description = "Converts LAPPS JSON/LD into GATE documents.",
-        requires_format = "lapps",
-        produces_format = "gate"
+	description = "Converts LAPPS JSON/LD into GATE documents.",
+	requires_format = "lapps",
+	produces_format = "gate"
 )
 public class JsonToGateConverter extends ConverterBase implements WebService
 {
