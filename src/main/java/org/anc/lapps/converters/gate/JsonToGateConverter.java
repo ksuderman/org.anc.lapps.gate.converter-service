@@ -3,7 +3,6 @@ package org.anc.lapps.converters.gate;
 import gate.Document;
 import gate.Factory;
 import org.anc.lapps.gate.serialization.GateSerializer;
-import org.anc.lapps.serialization.Container;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
@@ -12,6 +11,7 @@ import org.lappsgrid.discriminator.DiscriminatorRegistry;
 import org.lappsgrid.discriminator.Types;
 import org.lappsgrid.discriminator.Uri;
 import org.lappsgrid.experimental.annotations.ServiceMetadata;
+import org.lappsgrid.serialization.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +19,11 @@ import org.slf4j.LoggerFactory;
  * @author Keith Suderman
  */
 @ServiceMetadata(
+		  vendor = "http://www.anc.org",
+		  license = "apache2",
         description = "Converts LAPPS JSON/LD into GATE documents.",
-        inFormat = "lapps",
-        outFormat = "gate"
+        requires_format = "lapps",
+        produces_format = "gate"
 )
 public class JsonToGateConverter extends ConverterBase implements WebService
 {

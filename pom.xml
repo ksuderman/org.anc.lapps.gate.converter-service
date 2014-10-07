@@ -8,19 +8,19 @@
         <artifactId>war-parent-pom</artifactId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>org.anc.lapps.serialization</groupId>
-    <artifactId>gate-serialization</artifactId>
-    <version>0.4.0</version>
+    <groupId>org.anc.lapps.converters</groupId>
+    <artifactId>gate</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <name>Services: GATE Converters</name>
     <packaging>war</packaging>
     <properties>
         <lapps.api.version>2.0.0-SNAPSHOT</lapps.api.version>
         <lapps.core.version>2.0.0-SNAPSHOT</lapps.core.version>
         <lapps.discriminator.version>2.0.0-SNAPSHOT</lapps.discriminator.version>
-        <lapps.vocabulary.version>0.10.0</lapps.vocabulary.version>
-        <lapps.serialization.version>0.13.0</lapps.serialization.version>
-        <gate.serialization.version>1.1.0-SNAPSHOT</gate.serialization.version>
-        <anc.commons.version>3.4.0</anc.commons.version>
+        <lapps.vocabulary.version>1.0.0-SNAPSHOT</lapps.vocabulary.version>
+        <lapps.serialization.version>1.0.0-SNAPSHOT</lapps.serialization.version>
+        <gate.serialization.version>1.2.0-SNAPSHOT</gate.serialization.version>
+        <anc.commons.version>3.5.0</anc.commons.version>
         <groovy.version>2.2.0</groovy.version>
         <ivy.version>2.2.0</ivy.version>
         <gate.version>7.1</gate.version>
@@ -35,14 +35,34 @@
                         <annotationProcessor>org.lappsgrid.experimental.annotation.processing.MetadataProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.lappsgrid</groupId>
-                        <artifactId>discriminator</artifactId>
-                        <version>2.0.0-SNAPSHOT</version>
-                        <optional>true</optional>
-                    </dependency>
-                </dependencies>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>src/main/resources/metadata</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.anc.maven.plugins</groupId>
+                <artifactId>anc-maven-plugin</artifactId>
+                <version>1.0.6</version>
+                <executions>
+                    <execution>
+                        <id>versions</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>version</goal>
+                            <goal>version-class</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <package>org.anc.lapps.converters.gate</package>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -85,11 +105,6 @@
             <version>${lapps.vocabulary.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.anc.lapps</groupId>
-            <artifactId>serialization</artifactId>
-            <version>${lapps.serialization.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.anc</groupId>
             <artifactId>common</artifactId>
             <version>${anc.commons.version}</version>
@@ -97,7 +112,7 @@
         <dependency>
             <groupId>uk.ac.gate</groupId>
             <artifactId>gate-core</artifactId>
-            <version>7.1</version>
+            <version>${gate.version}</version>
         </dependency>
     </dependencies>
 </project>

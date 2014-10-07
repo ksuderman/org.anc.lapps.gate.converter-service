@@ -1,3 +1,7 @@
 target/
 .DS_Store
 *.iml
+*.log
+VERSION
+src/main/java/org/anc/lapps/converters/gate/Version.java
+

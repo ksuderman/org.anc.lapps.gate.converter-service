@@ -5,6 +5,7 @@ import org.anc.io.UTF8Reader;
 import org.lappsgrid.api.Data;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.experimental.annotations.CommonMetadata;
+import org.lappsgrid.experimental.annotations.ServiceMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.anc.lapps.logging.*;
@@ -14,11 +15,6 @@ import java.io.*;
 /**
  * @author Keith Suderman
  */
-@CommonMetadata(
-        vendor = "http://www.anc.org",
-        allow = "any",
-        license = "Apache 2.0"
-)
 public abstract class ConverterBase
 {
    private static final Logger logger = LoggerFactory.getLogger(ConverterBase.class);
