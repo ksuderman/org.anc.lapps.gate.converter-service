@@ -4,24 +4,25 @@ import gate.Document;
 import gate.Factory;
 import gate.creole.ResourceInstantiationException;
 import org.anc.lapps.gate.serialization.GateSerializer;
-import org.lappsgrid.api.Data;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
-import org.lappsgrid.discriminator.Types;
-import org.lappsgrid.discriminator.Uri;
 import org.lappsgrid.experimental.annotations.ServiceMetadata;
+import org.lappsgrid.serialization.Data;
+import org.lappsgrid.serialization.Serializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.lappsgrid.discriminator.Discriminators.Uri;
 
 /**
  * @author Keith Suderman
  */
 @ServiceMetadata(
 	description = "Converts GATE documents to the LAPPS JSON/LD format.",
-	requires_format = "lapps",
-	produces_format = "gate"
+	requires_format = "gate",
+	produces_format = "lapps"
 )
-public class GateToJsonConverter extends ConverterBase implements WebService
+public class GateToJsonConverter extends ConverterBase
 {
    private static Logger logger = LoggerFactory.getLogger(GateToJsonConverter.class);
 
@@ -30,25 +31,28 @@ public class GateToJsonConverter extends ConverterBase implements WebService
       super(GateToJsonConverter.class);
    }
 
-   public Data configure(Data input)
-   {
-      return DataFactory.error("Unsupported operation.");
-   }
+//   public Data configure(Data input)
+//   {
+//      return DataFactory.error("Unsupported operation.");
+//   }
 
-   public Data execute(Data input)
+   @Override
+   public String execute(String input)
    {
-      Data result;
+		String result;
+      Data<String> data = Serializer.parse(input, Data.class);
       Document document = null;
       try
       {
          logger.info("Converting document to JSON");
-         document = Factory.newDocument(input.getPayload());
+         document = Factory.newDocument(data.getPayload());
          logger.debug("Gate document created.");
-         String json = GateSerializer.toJson(document);
+         result = GateSerializer.toJson(document);
          logger.debug("Document serialized to JSON.");
-         result = new Data(Uri.JSON, json);
+//         result = new Data(Uri.JSON, json);
       }
-      catch (ResourceInstantiationException e)
+//		catch (NullPointerException e)
+      catch (NullPointerException | ResourceInstantiationException e)
       {
          logger.error("Unable to convert document.", e);
          result = DataFactory.error(e.getMessage());

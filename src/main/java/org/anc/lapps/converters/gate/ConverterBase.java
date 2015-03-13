@@ -2,7 +2,7 @@ package org.anc.lapps.converters.gate;
 
 import gate.Gate;
 import org.anc.io.UTF8Reader;
-import org.lappsgrid.api.Data;
+import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.experimental.annotations.CommonMetadata;
 import org.lappsgrid.experimental.annotations.ServiceMetadata;
@@ -19,7 +19,7 @@ import java.io.*;
 	vendor = "http://www.anc.org",
 	license = "apache2"
 )
-public abstract class ConverterBase
+public abstract class ConverterBase implements WebService
 {
    private static final Logger logger = LoggerFactory.getLogger(ConverterBase.class);
    private static Boolean initialized = false;
@@ -29,7 +29,7 @@ public abstract class ConverterBase
 
    // The metadata will be loaded from the classpath at runtime. The metadata
    // itself is generated at compile time.
-   protected Data metadata;
+   protected String metadata;
 
    public ConverterBase(Class<?> converterClass)
    {
@@ -117,7 +117,7 @@ public abstract class ConverterBase
          logger.info("GATE has been initialized.");
 
          // Load the metadata for the service.
-         String resourceName = "metadata/" + converterClass.getName() + ".json";
+         String resourceName = "/metadata/" + converterClass.getName() + ".json";
          InputStream stream = this.getClass().getResourceAsStream(resourceName);
          if (stream == null)
          {
@@ -139,7 +139,8 @@ public abstract class ConverterBase
       }
    }
 
-   public Data getMetadata()
+   @Override
+   public String getMetadata()
    {
       return metadata;
    }
