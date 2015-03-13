@@ -1,17 +1,25 @@
 package org.anc.lapps.converters.gate;
 
 import gate.Gate;
+import org.anc.io.UTF8Reader;
+import org.lappsgrid.api.WebService;
+import org.lappsgrid.core.DataFactory;
+import org.lappsgrid.experimental.annotations.CommonMetadata;
+import org.lappsgrid.experimental.annotations.ServiceMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.anc.lapps.logging.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 /**
  * @author Keith Suderman
  */
-public abstract class ConverterBase
+@CommonMetadata(
+	vendor = "http://www.anc.org",
+	license = "apache2"
+)
+public abstract class ConverterBase implements WebService
 {
    private static final Logger logger = LoggerFactory.getLogger(ConverterBase.class);
    private static Boolean initialized = false;
@@ -19,7 +27,11 @@ public abstract class ConverterBase
    protected Throwable savedException = null;
    protected static final Configuration K = new Configuration();
 
-   public ConverterBase()
+   // The metadata will be loaded from the classpath at runtime. The metadata
+   // itself is generated at compile time.
+   protected String metadata;
+
+   public ConverterBase(Class<?> converterClass)
    {
       synchronized (initialized) {
          if (!initialized)
@@ -103,6 +115,33 @@ public abstract class ConverterBase
 
          }
          logger.info("GATE has been initialized.");
+
+         // Load the metadata for the service.
+         String resourceName = "/metadata/" + converterClass.getName() + ".json";
+         InputStream stream = this.getClass().getResourceAsStream(resourceName);
+         if (stream == null)
+         {
+            metadata = DataFactory.error("Unable to locate service metadata: " + resourceName);
+            return;
+         }
+         UTF8Reader reader = null;
+         try
+         {
+            reader = new UTF8Reader(stream);
+            String json = reader.readString();
+            metadata = DataFactory.meta(json);
+         }
+         catch (IOException e)
+         {
+            metadata = DataFactory.error("Unable to load service metadata.", e);
+         }
+
       }
-}
+   }
+
+   @Override
+   public String getMetadata()
+   {
+      return metadata;
+   }
 }
