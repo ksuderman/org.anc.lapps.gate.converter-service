@@ -4,8 +4,11 @@ import gate.Gate;
 import org.anc.io.UTF8Reader;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
+import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.experimental.annotations.CommonMetadata;
-import org.lappsgrid.experimental.annotations.ServiceMetadata;
+import org.lappsgrid.metadata.ServiceMetadata;
+import org.lappsgrid.serialization.Data;
+import org.lappsgrid.serialization.Serializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.anc.lapps.logging.*;
@@ -129,7 +132,9 @@ public abstract class ConverterBase implements WebService
          {
             reader = new UTF8Reader(stream);
             String json = reader.readString();
-            metadata = DataFactory.meta(json);
+            ServiceMetadata metadata = Serializer.parse(json, ServiceMetadata.class);
+//            metadata = DataFactory.meta(json);
+            this.metadata = new Data<ServiceMetadata>(Discriminators.Uri.META, metadata).asJson();
          }
          catch (IOException e)
          {
