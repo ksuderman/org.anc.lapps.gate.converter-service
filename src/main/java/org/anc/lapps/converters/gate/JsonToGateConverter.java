@@ -16,6 +16,8 @@ import org.lappsgrid.serialization.lif.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 import static org.lappsgrid.discriminator.Discriminators.Uri;
 
 /**
@@ -37,7 +39,7 @@ public class JsonToGateConverter extends ConverterBase
 
    public String execute(String json)
    {
-		Data<Container> data = Serializer.parse(json, Data.class);
+		Data<Map> data = Serializer.parse(json, Data.class);
 		String discriminator = data.getDiscriminator();
 //		Discriminator discriminator = DiscriminatorRegistry.getByUri(input.getDiscriminator());
       if (!discriminator.equals(Uri.JSON) && !discriminator.equals(Uri.JSON_LD)) {
@@ -48,7 +50,7 @@ public class JsonToGateConverter extends ConverterBase
       try
       {
          logger.debug("Converting JSON to GATE.");
-         Container container = data.getPayload();
+         Container container = new Container(data.getPayload());
          logger.trace("Container created.");
          Document document = GateSerializer.convertToDocument(container);
          logger.trace("Document created.");

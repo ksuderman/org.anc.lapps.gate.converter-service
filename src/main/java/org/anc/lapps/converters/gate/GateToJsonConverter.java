@@ -41,11 +41,20 @@ public class GateToJsonConverter extends ConverterBase
    {
 		String result;
       Data<String> data = Serializer.parse(input, Data.class);
+      if (!Uri.GATE.equals(data.getDiscriminator()))
+      {
+         return DataFactory.error("Invalid discriminator type: " + data.getDiscriminator());
+      }
+      String payload = data.getPayload();
+      if (payload == null)
+      {
+         return DataFactory.error("Payload is empty");
+      }
       Document document = null;
       try
       {
          logger.info("Converting document to JSON");
-         document = Factory.newDocument(data.getPayload());
+         document = Factory.newDocument(payload);
          logger.debug("Gate document created.");
          result = GateSerializer.toJson(document);
          logger.debug("Document serialized to JSON.");
