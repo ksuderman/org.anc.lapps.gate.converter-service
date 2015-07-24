@@ -42,7 +42,7 @@ public class JsonToGateConverter extends ConverterBase
 		Data<Map> data = Serializer.parse(json, Data.class);
 		String discriminator = data.getDiscriminator();
 //		Discriminator discriminator = DiscriminatorRegistry.getByUri(input.getDiscriminator());
-      if (!discriminator.equals(Uri.JSON) && !discriminator.equals(Uri.JSON_LD)) {
+      if (!discriminator.equals(Uri.JSON) && !discriminator.equals(Uri.LAPPS) && !discriminator.equals(Uri.JSON_LD)) {
          logger.error("Invalid input discriminator. Expected JSON but found " + discriminator);
          return DataFactory.error("Invalid input type: " + discriminator);
       }

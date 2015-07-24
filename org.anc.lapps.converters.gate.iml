@@ -89,7 +89,7 @@
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:3.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-core:9.0.1" level="project" />
     <orderEntry type="library" name="Maven: xmlunit:xmlunit:1.2" level="project" />
-    <orderEntry type="module" module-name="org.anc.json.validator" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.anc.json:validator:1.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.fge:json-schema-validator:2.2.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: joda-time:joda-time:2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.googlecode.libphonenumber:libphonenumber:6.0" level="project" />
