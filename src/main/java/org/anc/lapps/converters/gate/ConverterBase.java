@@ -5,7 +5,7 @@ import org.anc.io.UTF8Reader;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
 import org.lappsgrid.discriminator.Discriminators;
-import org.lappsgrid.experimental.annotations.CommonMetadata;
+import org.lappsgrid.annotations.CommonMetadata;
 import org.lappsgrid.metadata.ServiceMetadata;
 import org.lappsgrid.serialization.Data;
 import org.lappsgrid.serialization.Serializer;
