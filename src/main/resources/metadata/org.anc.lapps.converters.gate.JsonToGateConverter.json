@@ -1,0 +1,15 @@
+{
+  "$schema" : "http://vocab.lappsgrid.org/schema/service-schema-1.0.0.json",
+  "name" : "",
+  "version" : "2.0.0",
+  "description" : "Converts LAPPS JSON/LD into GATE documents.",
+  "vendor" : "http://www.anc.org",
+  "allow" : "http://vocab.lappsgrid.org/ns/allow#any",
+  "license" : "http://vocab.lappsgrid.org/ns/license#apache-2.0",
+  "requires" : {
+    "format" : [ "http://vocab.lappsgrid.org/ns/media/jsonld#lif" ]
+  },
+  "produces" : {
+    "format" : [ "http://vocab.lappsgrid.org/ns/media/xml#gate" ]
+  }
+}
