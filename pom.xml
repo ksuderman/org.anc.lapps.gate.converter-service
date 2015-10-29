@@ -16,11 +16,11 @@
     <packaging>war</packaging>
     <properties>
         <lapps.api.version>2.0.0</lapps.api.version>
-        <lapps.core.version>2.0.0</lapps.core.version>
-        <lapps.discriminator.version>2.0.1</lapps.discriminator.version>
-        <lapps.vocabulary.version>1.0.0</lapps.vocabulary.version>
-        <lapps.serialization.version>2.0.1</lapps.serialization.version>
-        <lapps.annotations.version>1.0.2-SNAPSHOT</lapps.annotations.version>
+        <lapps.core.version>2.0.1</lapps.core.version>
+        <lapps.discriminator.version>2.2.0</lapps.discriminator.version>
+        <lapps.vocabulary.version>2.1.1</lapps.vocabulary.version>
+        <lapps.serialization.version>2.1.0</lapps.serialization.version>
+        <lapps.annotations.version>1.0.2</lapps.annotations.version>
         <gate.serialization.version>2.0.1-SNAPSHOT</gate.serialization.version>
         <anc.commons.version>3.5.0</anc.commons.version>
         <json.validator.version>1.1.0</json.validator.version>
