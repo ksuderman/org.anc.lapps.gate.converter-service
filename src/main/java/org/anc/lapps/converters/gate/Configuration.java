@@ -1,6 +1,6 @@
-package org.anc.lapps.serialization.gate;
+package org.anc.lapps.converters.gate;
 
-import org.anc.constants.Constants;
+//import org.anc.constants.Constants;
 
 import java.io.IOException;
 
@@ -16,16 +16,16 @@ public class Configuration extends Constants
 //   public final String GATE_PLUGINS = null;
 //
 
-   @Default("/usr/share/gate")
+   @Default("/usr/share/lapps/gate")
    public final String GATE_HOME = null;
 
-   @Default("/usr/share/gate/plugins")
+   @Default("/usr/share/lapps/gate/plugins")
    public final String PLUGINS_HOME = null;
 
-   @Default("/usr/share/gate/gate.xml")
+   @Default("/usr/share/lapps/gate/gate.xml")
    public final String SITE_CONFIG = null;
 
-   @Default("/usr/share/gate/user-gate.xml")
+   @Default("/usr/share/lapps/gate/user-gate.xml")
    public final String USER_CONFIG = null;
 
    @Default("8")
