@@ -4,8 +4,11 @@ import gate.Gate;
 import org.anc.io.UTF8Reader;
 import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
-import org.lappsgrid.experimental.annotations.CommonMetadata;
-import org.lappsgrid.experimental.annotations.ServiceMetadata;
+import org.lappsgrid.discriminator.Discriminators;
+import org.lappsgrid.annotations.CommonMetadata;
+import org.lappsgrid.metadata.ServiceMetadata;
+import org.lappsgrid.serialization.Data;
+import org.lappsgrid.serialization.Serializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.anc.lapps.logging.*;
@@ -25,7 +28,7 @@ public abstract class ConverterBase implements WebService
    private static Boolean initialized = false;
 
    protected Throwable savedException = null;
-   protected static final Configuration K = new Configuration();
+//   protected static final Configuration K = new Configuration();
 
    // The metadata will be loaded from the classpath at runtime. The metadata
    // itself is generated at compile time.
@@ -33,6 +36,7 @@ public abstract class ConverterBase implements WebService
 
    public ConverterBase(Class<?> converterClass)
    {
+
       synchronized (initialized) {
          if (!initialized)
          {
@@ -40,38 +44,42 @@ public abstract class ConverterBase implements WebService
             initialized = true;  // We only try this once.
             try
             {
-               File gateHome = new File(K.GATE_HOME);
+               File gateHome = new File("/usr/share/gate");
+               if (!gateHome.exists())
+               {
+                  gateHome = new File("/usr/share/lapps/gate");
+               }
                if (!gateHome.exists())
                {
                   logger.error("Gate home not found: " + gateHome.getPath());
-                  savedException = new FileNotFoundException(K.GATE_HOME);
+                  savedException = new FileNotFoundException(gateHome.getPath());
                   return;
                }
-               logger.info("Gate home: " + K.GATE_HOME);
-               File plugins = new File(K.PLUGINS_HOME);
+               logger.info("Gate home: " + gateHome.getPath());
+               File plugins = new File(gateHome, "plugins");
                if (!plugins.exists())
                {
                   logger.error("Gate plugins not found: " + plugins.getPath());
-                  savedException = new FileNotFoundException(K.PLUGINS_HOME);
+                  savedException = new FileNotFoundException(plugins.getPath());
                   return;
                }
-               logger.info("Plugins home: " + K.PLUGINS_HOME);
-               File siteConfig = new File(K.SITE_CONFIG);
+               logger.info("Plugins home: " + plugins.getPath());
+               File siteConfig = new File(gateHome, "gate.xml");
                if (!siteConfig.exists())
                {
                   logger.error("Site config not found: " + siteConfig.getPath());
-                  savedException = new FileNotFoundException(K.SITE_CONFIG);
+                  savedException = new FileNotFoundException(siteConfig.getPath());
                   return;
                }
-               logger.info("Site config: " + K.SITE_CONFIG);
-               File userConfig = new File(K.USER_CONFIG);
+               logger.info("Site config: " + siteConfig.getPath());
+               File userConfig = new File(gateHome, "user-gate.xml");
                if (!userConfig.exists())
                {
                   logger.error("User config not found: " + userConfig.getPath());
-                  savedException = new FileNotFoundException(K.USER_CONFIG);
+                  savedException = new FileNotFoundException(userConfig.getPath());
                   return;
                }
-               logger.info("User config: " + K.USER_CONFIG);
+               logger.info("User config: " + userConfig.getPath());
                Gate.setGateHome(gateHome);
                Gate.setSiteConfigFile(siteConfig);
                Gate.setPluginsHome(plugins);
@@ -129,7 +137,9 @@ public abstract class ConverterBase implements WebService
          {
             reader = new UTF8Reader(stream);
             String json = reader.readString();
-            metadata = DataFactory.meta(json);
+            ServiceMetadata metadata = Serializer.parse(json, ServiceMetadata.class);
+//            metadata = DataFactory.meta(json);
+            this.metadata = new Data<ServiceMetadata>(Discriminators.Uri.META, metadata).asJson();
          }
          catch (IOException e)
          {

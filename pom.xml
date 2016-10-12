@@ -6,25 +6,29 @@
     <parent>
         <groupId>org.lappsgrid.maven</groupId>
         <artifactId>war-parent-pom</artifactId>
-        <version>2.0.0-SNAPSHOT</version>
+        <version>2.0.0</version>
     </parent>
     <groupId>org.anc.lapps.converters</groupId>
     <artifactId>gate</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0</version>
     <name>Services: GATE Converters</name>
+    <description>Converts GATE/XML to/from LIF.</description>
     <packaging>war</packaging>
     <properties>
-        <lapps.api.version>2.0.0</lapps.api.version>
-        <lapps.core.version>2.0.0-SNAPSHOT</lapps.core.version>
-        <lapps.discriminator.version>2.0.1</lapps.discriminator.version>
-        <lapps.vocabulary.version>1.0.0-SNAPSHOT</lapps.vocabulary.version>
-        <lapps.serialization.version>2.0.0-SNAPSHOT</lapps.serialization.version>
-        <lapps.annotations.version>1.0.0</lapps.annotations.version>
-        <gate.serialization.version>1.2.0-SNAPSHOT</gate.serialization.version>
+        <java.version>1.7</java.version>
+        <lapps.api.version>2.0.1</lapps.api.version>
+        <lapps.core.version>2.0.2</lapps.core.version>
+        <lapps.discriminator.version>2.2.1</lapps.discriminator.version>
+        <lapps.vocabulary.version>2.3.0</lapps.vocabulary.version>
+        <lapps.serialization.version>2.3.0</lapps.serialization.version>
+        <lapps.annotations.version>1.0.2</lapps.annotations.version>
+        <gate.serialization.version>2.0.1</gate.serialization.version>
         <anc.commons.version>3.5.0</anc.commons.version>
-        <json.validator.version>1.0.1</json.validator.version>
-        <groovy.version>2.2.0</groovy.version>
+        <json.validator.version>1.1.0</json.validator.version>
+        <groovy.version>2.4.3</groovy.version>
+        <!--
         <ivy.version>2.2.0</ivy.version>
+        -->
         <gate.version>7.1</gate.version>
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,7 +42,7 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <annotationProcessors>
-                        <annotationProcessor>org.lappsgrid.experimental.annotation.processing.MetadataProcessor</annotationProcessor>
+                        <annotationProcessor>org.lappsgrid.annotation.processing.MetadataProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
             </plugin>
@@ -70,11 +74,29 @@
                     <package>org.anc.lapps.converters.gate</package>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <failIfNoTests>true</failIfNoTests>
+                    <includes>
+                        <include>**/*Test*.*</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
+        <!--
+        -->
         <dependency>
-            <groupId>org.lappsgrid.experimental</groupId>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.lappsgrid</groupId>
             <artifactId>annotations</artifactId>
             <version>${lapps.annotations.version}</version>
             <scope>compile</scope>
@@ -105,6 +127,11 @@
             <version>${lapps.vocabulary.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.lappsgrid</groupId>
+            <artifactId>serialization</artifactId>
+            <version>${lapps.serialization.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.anc</groupId>
             <artifactId>common</artifactId>
             <version>${anc.commons.version}</version>
@@ -120,85 +147,5 @@
             <version>${json.validator.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>net.servicegrid</groupId>
-            <artifactId>jp.go.nict.langrid.client</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.servicegrid</groupId>
-            <artifactId>jp.go.nict.langrid.client.soap</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.servicegrid</groupId>
-            <artifactId>
-                jp.go.nict.langrid.servicecontainer
-            </artifactId>
-            <version>1.0.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.servicegrid</groupId>
-            <artifactId>
-                jp.go.nict.langrid.servicecontainer.handler.axis
-            </artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <version>9.3.0.M1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-            </exclusions>
-            <scope>optional</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.servicegrid</groupId>
-            <artifactId>jp.go.nict.langrid.commons</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-discovery</groupId>
-            <artifactId>commons-discovery</artifactId>
-            <version>0.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.axis</groupId>
-            <artifactId>axis-jaxrpc</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.axis</groupId>
-            <artifactId>axis-saaj</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>axis</groupId>
-            <artifactId>axis-wsdl4j</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-                -->
-
     </dependencies>
 </project>

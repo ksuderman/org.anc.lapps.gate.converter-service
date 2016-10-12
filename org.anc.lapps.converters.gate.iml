@@ -32,19 +32,20 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.lappsgrid.experimental:annotations:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:annotations:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid.experimental:metadata:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:metadata:1.0.4" level="project" />
     <orderEntry type="module" module-name="org.anc.lapps.gate.serialization" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:serialization:2.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.ivy:ivy:2.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:api:2.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:core:2.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:2.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:vocabulary:1.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ivy:ivy:2.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:api:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.commons:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:core:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:vocabulary:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:serialization:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.anc:common:3.5.0" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-core:7.1" level="project" />
     <orderEntry type="library" name="Maven: uk.ac.gate:gate-asm:3.1" level="project" />
@@ -89,7 +90,7 @@
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:3.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-core:9.0.1" level="project" />
     <orderEntry type="library" name="Maven: xmlunit:xmlunit:1.2" level="project" />
-    <orderEntry type="module" module-name="org.anc.json.validator" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.anc.json:validator:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.fge:json-schema-validator:2.2.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: joda-time:joda-time:2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.googlecode.libphonenumber:libphonenumber:6.0" level="project" />
@@ -103,7 +104,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.google.guava:guava:16.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.fge:jackson-coreutils:1.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.mozilla:rhino:1.7R4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.anc.json:compiler:1.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.anc.json:compiler:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: commons-cli:commons-cli:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:service-grid-libs:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />

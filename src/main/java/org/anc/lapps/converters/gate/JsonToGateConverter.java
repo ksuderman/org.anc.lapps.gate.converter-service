@@ -3,18 +3,15 @@ package org.anc.lapps.converters.gate;
 import gate.Document;
 import gate.Factory;
 import org.anc.lapps.gate.serialization.GateSerializer;
-import org.lappsgrid.api.WebService;
+import org.lappsgrid.annotations.ServiceMetadata;
 import org.lappsgrid.core.DataFactory;
-//import org.lappsgrid.discriminator.Discriminator;
-//import org.lappsgrid.discriminator.DiscriminatorRegistry;
-//import org.lappsgrid.discriminator.Types;
-//import org.lappsgrid.discriminator.Uri;
-import org.lappsgrid.experimental.annotations.ServiceMetadata;
 import org.lappsgrid.serialization.Data;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 import static org.lappsgrid.discriminator.Discriminators.Uri;
 
@@ -37,10 +34,10 @@ public class JsonToGateConverter extends ConverterBase
 
    public String execute(String json)
    {
-		Data<Container> data = Serializer.parse(json, Data.class);
+		Data<Map> data = Serializer.parse(json, Data.class);
 		String discriminator = data.getDiscriminator();
 //		Discriminator discriminator = DiscriminatorRegistry.getByUri(input.getDiscriminator());
-      if (!discriminator.equals(Uri.JSON) && !discriminator.equals(Uri.JSON_LD)) {
+      if (!discriminator.equals(Uri.JSON) && !discriminator.equals(Uri.LAPPS) && !discriminator.equals(Uri.JSON_LD)) {
          logger.error("Invalid input discriminator. Expected JSON but found " + discriminator);
          return DataFactory.error("Invalid input type: " + discriminator);
       }
@@ -48,7 +45,7 @@ public class JsonToGateConverter extends ConverterBase
       try
       {
          logger.debug("Converting JSON to GATE.");
-         Container container = data.getPayload();
+         Container container = new Container(data.getPayload());
          logger.trace("Container created.");
          Document document = GateSerializer.convertToDocument(container);
          logger.trace("Document created.");

@@ -4,9 +4,8 @@ import gate.Document;
 import gate.Factory;
 import gate.creole.ResourceInstantiationException;
 import org.anc.lapps.gate.serialization.GateSerializer;
-import org.lappsgrid.api.WebService;
 import org.lappsgrid.core.DataFactory;
-import org.lappsgrid.experimental.annotations.ServiceMetadata;
+import org.lappsgrid.annotations.ServiceMetadata;
 import org.lappsgrid.serialization.Data;
 import org.lappsgrid.serialization.Serializer;
 import org.slf4j.Logger;
@@ -41,11 +40,20 @@ public class GateToJsonConverter extends ConverterBase
    {
 		String result;
       Data<String> data = Serializer.parse(input, Data.class);
+      if (!Uri.GATE.equals(data.getDiscriminator()))
+      {
+         return DataFactory.error("Invalid discriminator type: " + data.getDiscriminator());
+      }
+      String payload = data.getPayload();
+      if (payload == null)
+      {
+         return DataFactory.error("Payload is empty");
+      }
       Document document = null;
       try
       {
          logger.info("Converting document to JSON");
-         document = Factory.newDocument(data.getPayload());
+         document = Factory.newDocument(payload);
          logger.debug("Gate document created.");
          result = GateSerializer.toJson(document);
          logger.debug("Document serialized to JSON.");
