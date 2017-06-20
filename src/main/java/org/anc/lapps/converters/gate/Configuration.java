@@ -16,16 +16,16 @@ public class Configuration extends Constants
 //   public final String GATE_PLUGINS = null;
 //
 
-   @Default("/usr/share/lapps/gate")
+   @Default("/usr/local/lapps/gate")
    public final String GATE_HOME = null;
 
-   @Default("/usr/share/lapps/gate/plugins")
+   @Default("/usr/local/lapps/gate/plugins")
    public final String PLUGINS_HOME = null;
 
-   @Default("/usr/share/lapps/gate/gate.xml")
+   @Default("/usr/local/lapps/gate/gate.xml")
    public final String SITE_CONFIG = null;
 
-   @Default("/usr/share/lapps/gate/user-gate.xml")
+   @Default("/usr/local/lapps/gate/user-gate.xml")
    public final String USER_CONFIG = null;
 
    @Default("8")

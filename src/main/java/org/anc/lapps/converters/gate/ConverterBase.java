@@ -28,7 +28,7 @@ public abstract class ConverterBase implements WebService
    private static Boolean initialized = false;
 
    protected Throwable savedException = null;
-//   protected static final Configuration K = new Configuration();
+   protected static final Configuration K = new Configuration();
 
    // The metadata will be loaded from the classpath at runtime. The metadata
    // itself is generated at compile time.
@@ -44,7 +44,8 @@ public abstract class ConverterBase implements WebService
             initialized = true;  // We only try this once.
             try
             {
-               File gateHome = new File("/usr/share/gate");
+//               File gateHome = new File("/usr/share/gate");
+               File gateHome = new File(K.GATE_HOME);
                if (!gateHome.exists())
                {
                   gateHome = new File("/usr/share/lapps/gate");
